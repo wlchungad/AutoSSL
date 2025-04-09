@@ -1,6 +1,6 @@
 param(
     [Parameter(Mandatory, HelpMessage="Enter the domain")][string]$DomainName,
-    [Parameter(Mandatory, HelpMessage="Mode: basic/advanced")][string]$GenCertMode,
+    [Parameter(Mandatory, HelpMessage="Mode: basic/advanced")][string]$GenCertMode='basic',
     [Parameter()]$GenCertPath='C:\'
 )
 Write-Host "Hostname: $DomainName"
@@ -14,9 +14,7 @@ Write-Host "Certificate is generated in: $GenCertPath"
 
 # one-liner command:
 if ($GenCertMode -eq 'basic') {
-    cmd.exe /c "openssl req -x509 -sha256 -nodes -days 365 -newkey rsa:4096 \
-    -keyout $DomainName.private.key -out $DomainName.cer \
-    -subj '/C=US/ST=Denial/L=Springfield/O=Dis/OU=Dis/CN=$DomainName'"
+    $cmd = "openssl req -x509 -sha256 -nodes -days 365 -newkey rsa:4096 -keyout $DomainName.private.key -out $DomainName.cer -subj /C=US/ST=Denial/L=Springfield/O=Dis/OU=Dis/CN=$DomainName"
 } elseif ($GenCertMode -eq 'advanced'){
     Write-Host "Please enter the following details for the certificate:"
     $Country = Read-Host "Enter Country (C)"
@@ -24,22 +22,26 @@ if ($GenCertMode -eq 'basic') {
     $Locality = Read-Host "Enter Locality / City Name (L)"
     $Organization = Read-Host "Enter Company Name (O)"
     $OrganizationUnit = Read-Host "Enter Company Section Name(OU)"
-    cmd.exe /c "openssl req -x509 -sha256 -nodes -days 365 -newkey rsa:4096 \
-    -keyout $DomainName.private.key -out $DomainName.cer \
-    -subj '/C=$Country/ST=$StateName/L=$Locality/O=$Organization/OU=$OrganizationUnit/CN=$DomainName'"
+    $cmd = "openssl req -x509 -sha256 -nodes -days 365 -newkey rsa:4096 -keyout $DomainName.private.key -out $DomainName.cer -subj /C=$Country/ST=$StateName/L=$Locality/O=$Organization/OU=$OrganizationUnit/CN=$DomainName"
 }
+cmd.exe /c $cmd
+
 # verify the certificate
-cmd.exe /c "openssl x509 -in $DomainName.cer -noout -text"
+Write-Host "Please check the certificate details:"
+$cmd = "openssl x509 -in $DomainName.cer -noout -text"
+cmd.exe /c $cmd
 Read-Host -Prompt "Press Enter to continue"
 
-# trust the certificates
+# trust the certificates (as server, not root)
 $params = @{
     FilePath = ".\$DomainName.cer"
     CertStoreLocation = 'Cert:\LocalMachine\Root'
 }
 Import-Certificate @params
+Read-Host -Prompt "Press Enter to continue"
 
 # move the files to target directory
 Move-Item -Path ".\$DomainName.cer" -Destination "$GenCertPath\$DomainName.cer"
 Move-Item -Path ".\$DomainName.private.key" -Destination "$GenCertPath\$DomainName.private.key"
 
+Read-Host -Prompt "Press Enter to continue"
