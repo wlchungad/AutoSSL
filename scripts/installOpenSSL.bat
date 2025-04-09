@@ -1,9 +1,9 @@
 @echo off
 setlocal enabledelayedexpansion
 REM This script installs OpenSSL and sets the environment variable for it
-REM Get the installer and install by msiexec
+REM Get the installer by wget/curl and install by msiexec
 REM Remove installer after installation
-wget https://slproweb.com/download/Win64OpenSSL-3_4_1.msi -O OpenSSL.msi
+if not exist ".\OpenSSL.msi" "curl https://slproweb.com/download/Win64OpenSSL-3_4_1.msi -O OpenSSL.msi"
 msiexec /i OpenSSL.msi /quiet /norestart
 del OpenSSL.msi
 
@@ -13,7 +13,8 @@ REM set the environment variable for OpenSSL
 setx PATH=%PATH%;%OPENSSL_PATH% /m
 
 REM Test if OpenSSL is already installed
-openssl version >nul 2>&1
+openssl version 2>&1
+pause
 if %errorlevel% equ 0 (
     echo OpenSSL is installed successfully.
     endlocal
