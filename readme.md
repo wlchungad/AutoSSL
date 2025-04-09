@@ -6,7 +6,7 @@ Inspired by <a href="https://www.ophiuchi.dev/">Ophiuchi</a>, a project setting 
 
 ## How to use
 ### Pre-requisite software installation
-> This step is optional if openssl are installed before.
+> This step is optional if openssl is installed before.
 1. Run `installOpenSSL.bat`. This will set the OpenSSL tool for certificate creation.
 ### Setting up for SSL/TLS
 2. Run `.\genCert.ps1 <domain> <mode>`. This would create an interactive command prompt for generating certificate.<br>
