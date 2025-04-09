@@ -1,9 +1,8 @@
 @echo off
-set IP=%1
-set hostname=%2
+set hostname=%1
 
 setlocal
 set "HOSTS_FILE=%SystemRoot%\System32\drivers\etc\hosts"
-set "command=%IP% %hostname%"
+set "command=127.0.0.1 %hostname%"
 ECHO %command%>>%HOSTS_FILE%
 endlocal

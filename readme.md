@@ -9,8 +9,8 @@ Inspired by <a href="https://www.ophiuchi.dev/">Ophiuchi</a>, a project setting 
 > This step is optional if openssl are installed before.
 1. Run `installOpenSSL.bat`. This will set the OpenSSL tool for certificate creation.
 ### Setting up for SSL/TLS
-2. Run `genCert.ps1 <domain> <mode> <position>`. This would create an interactive command prompt for generating certificate.<br>
-The default location to store certificate would be "C:\\.".<br>
+2. Run `.\genCert.ps1 <domain> <mode>`. This would create an interactive command prompt for generating certificate.<br>
+The default location to store certificate would be "C:\\." Change by adding desired folder path at the end of command.<br>
 For basic mode, just type hostname, and it generates certificate with dummy information.
     <table>
         <tr>
@@ -29,7 +29,7 @@ For basic mode, just type hostname, and it generates certificate with dummy info
         </tr>
     </table>
     For advanced mode, the program prompts for information as usual.
-3. Run `updateHostTable.bat <IP> <hostname>`. This program adds the record to local host table, so browsers should recognize the hostname to `localhost`.
+3. Run `updateHostTable.bat <hostname>`. This program adds the record to local host table, so browsers should recognize and link the hostname to `localhost`.
 4. Use your favourite webserver service and start serving HTTPS!
 
 ## Future update
