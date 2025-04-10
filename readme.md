@@ -5,6 +5,11 @@ The main purpose of this project is to help myself (and other developers) to rel
 Inspired by <a href="https://www.ophiuchi.dev/">Ophiuchi</a>, a project setting up SSL environment for local machine, I think Windows Server also deserve a handy tool to do so.
 
 ## How to use
+1. Download this project.
+2. Edit `setup.conf`.
+3. Run `main.ps1`.
+
+## Program Explained
 ### Pre-requisite software installation
 > This step is optional if openssl is installed before.
 1. Run `installOpenSSL.bat`. This will set the OpenSSL tool for certificate creation if it is not installed.
@@ -33,7 +38,7 @@ For basic mode, just type hostname, and it generates certificate with dummy info
 4. Use your favourite webserver service and start serving HTTPS!
 
 ## Future update
-- Maybe I will include the support of `.properties` or `.conf`.
+- (Done) Maybe I will include the support of `.properties` or `.conf`.
 
 ## Acknowledgement
 - https://www.ophiuchi.dev/
