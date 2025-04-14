@@ -2,7 +2,7 @@
 setlocal enabledelayedexpansion
 REM This script installs OpenSSL and sets the environment variable for it
 REM We will check if OpenSSL is already installed
-powershell.exe -File CheckOpenSSL.ps1
+powershell.exe -File ".\CheckOpenSSL.ps1"
 if %ERRORLEVEL% equ 0 (
     echo OpenSSL is installed.
     exit /b 0
@@ -19,7 +19,7 @@ if %ERRORLEVEL% equ 0 (
     REM The installation path would be the default path for OpenSSL
     set "OPENSSL_PATH=C:\Program Files\OpenSSL-Win64\bin"
     REM set the environment variable for OpenSSL
-    setx /m PATH "%PATH%;%OPENSSL_PATH%"
+    setx PATH "%PATH%;%OPENSSL_PATH%"
 
     if %errorlevel% equ 0 (
         echo OpenSSL is installed successfully.

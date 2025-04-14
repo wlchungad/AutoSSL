@@ -11,10 +11,10 @@ Write-Host "Certificate is generated in: $GenCertPath"
 if ($GenCertMode -eq 'basic') {
     $cmd = "openssl req -x509 -sha256 -nodes -days 365 -newkey rsa:4096 -keyout $DomainName.private.key -out $DomainName.cer -subj /C=US/ST=Denial/L=Springfield/O=Dis/OU=Dis/CN=$DomainName"
 } elseif ($GenCertMode -eq 'advanced'){
-    $ConfigFile = ".\setup.conf"
-    $ConfigContent = Get-Content $ConfigFile -Raw  # Read as a single string
+    $ConfigFile = "..\setup.conf"
+    # $ConfigContent =   # Read as a single string
     try {
-        $Config = ConvertFrom-StringData $ConfigContent
+        $Config = ConvertFrom-StringData (Get-Content $ConfigFile -Raw)
     } catch {
         Write-Error "Error parsing configuration file: $($_.Exception.Message)"
         exit 1

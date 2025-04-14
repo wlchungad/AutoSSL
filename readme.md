@@ -7,7 +7,7 @@ Inspired by <a href="https://www.ophiuchi.dev/">Ophiuchi</a>, a project setting 
 ## How to use
 1. Download this project.
 2. Edit `setup.conf`.
-3. Run `main.ps1`.
+3. Run `main.ps1` <b>As Administrator</b>.
 
 ## Program Explained
 ### Pre-requisite software installation
@@ -38,7 +38,8 @@ For basic mode, just type hostname, and it generates certificate with dummy info
 4. Use your favourite webserver service and start serving HTTPS!
 
 ## Future update
-- (Done) Maybe I will include the support of `.properties` or `.conf`.
+- [x] ~~*Maybe I will include the support of `.properties` or `.conf`*~~ [2025-04-10]
+- [ ] Logging and logging.properties
 
 ## Acknowledgement
 - https://www.ophiuchi.dev/

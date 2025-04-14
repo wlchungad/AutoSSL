@@ -1,11 +1,11 @@
 $ConfigFile = ".\setup.conf"
 
 # Read the file content
-$ConfigContent = Get-Content $ConfigFile -Raw  # Read as a single string
+# $ConfigContent = Get-Content $ConfigFile -Raw  # Read as a single string
 
 # Convert the string data to a hashtable
 try {
-    $Config = ConvertFrom-StringData $ConfigContent
+    $Config = ConvertFrom-StringData (Get-Content $ConfigFile -Raw)
 } catch {
     Write-Error "Error parsing configuration file: $($_.Exception.Message)"
     exit
